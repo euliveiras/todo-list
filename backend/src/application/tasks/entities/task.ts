@@ -1,11 +1,12 @@
+import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { Categories } from './categories';
+import { Category } from './category';
 
 interface TaskProps {
   label: string;
   additionalInfo?: string;
   expiration: Date;
-  categories: Categories;
+  categories: Category;
   ownerId: string;
   createdAt: Date;
   updatedAt?: Date;
@@ -13,12 +14,16 @@ interface TaskProps {
 
 export type Replace<T, R> = Omit<T, keyof R> & R;
 
+@Injectable()
 export class Task {
   private _id: string;
   private props: TaskProps;
 
-  constructor(props: Replace<TaskProps, { createdAt: Date }>, _id?: string) {
+  constructor(props: Replace<TaskProps, { createdAt?: Date }>, _id?: string) {
     this._id = _id ?? randomUUID();
+
+    this.validateLabel(props.label);
+
     this.props = {
       ...props,
       createdAt: props.createdAt ?? new Date(),
@@ -26,7 +31,10 @@ export class Task {
   }
 
   private validateLabel(label: string) {
-    return label.length >= 2;
+    const isLabelValid = label.length >= 2;
+    if (!isLabelValid) {
+      throw new Error('Label must contain more than 2 characters');
+    }
   }
 
   public get id() {
@@ -38,11 +46,8 @@ export class Task {
   }
 
   public set label(label: string) {
-    const isLabelValid = this.validateLabel(label);
+    this.validateLabel(label);
 
-    if (!isLabelValid) {
-      throw new Error('Label must contain more than 2 characters');
-    }
     this.props.label = label;
   }
 
@@ -62,7 +67,7 @@ export class Task {
     return this.props.categories;
   }
 
-  public set categories(categories: Categories) {
+  public set categories(categories: Category) {
     this.props.categories = categories;
   }
 
