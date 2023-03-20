@@ -12,4 +12,5 @@ export abstract class TasksRepository {
   abstract update(id: string, props: UpdateTaskDTO): Promise<Task>;
   abstract findById(taskId: string): Promise<Task>;
   abstract deleteById(taskId: string): Promise<void>;
+  abstract findManyTasksByOwnerId(ownerId: string): Promise<Task[]>;
 }

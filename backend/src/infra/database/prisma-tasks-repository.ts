@@ -16,6 +16,15 @@ export class PrismaTasksRepository implements TasksRepository {
       data: raw,
     });
   }
+  async findManyTasksByOwnerId(ownerId: string): Promise<Task[]> {
+    const tasks = await this.prisma.task.findMany({
+      where: {
+        ownerId,
+      },
+    });
+
+    return tasks.map((t) => PrismaTasksMapper.toDomain(t));
+  }
   update(id: string, props: UpdateTaskDTO): Promise<Task> {
     throw new Error('Method not implemented.');
   }

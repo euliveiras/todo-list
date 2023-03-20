@@ -7,6 +7,9 @@ import {
 export class InMemoryTasksRepository implements TasksRepository {
   private tasks: Task[] = [];
 
+  async findManyTasksByOwnerId(ownerId: string): Promise<Task[]> {
+    return this.tasks.filter((t) => t.ownerId === ownerId);
+  }
   async deleteById(taskId: string): Promise<void> {
     const newTasks = this.tasks.filter((t) => t.id !== taskId);
     this.tasks = newTasks;

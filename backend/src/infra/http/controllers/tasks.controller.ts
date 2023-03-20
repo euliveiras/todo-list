@@ -1,15 +1,19 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateTask } from 'src/application/tasks/use-cases/create-task';
+import { FindManyTasksByOwner } from 'src/application/tasks/use-cases/find-many-tasks-by-owner';
 import { CreateTaskBody } from '../dtos/CreateTaskBody';
 import { HttpMapper } from '../mappers/http-mapper';
 import { ValidationPipe } from '../validations/validation.pipe';
 
 @Controller('tasks')
 export class TasksController {
-  constructor(private createTask: CreateTask) {}
-  @Get()
-  findAll(): string {
-    return 'This action returns all cat';
+  constructor(
+    private createTask: CreateTask,
+    private findMany: FindManyTasksByOwner,
+  ) {}
+  @Get(':id')
+  findAll(@Param('id') id: string) {
+    return this.findMany.execute(id);
   }
 
   @Post()
