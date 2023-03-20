@@ -1,0 +1,27 @@
+:root {
+    --font-body: Ubuntu, sans-serif;
+    --bg-primary-clr: #adbaeb;
+    --card-primary-clr: #f4f6fd;
+    --font-body-clr: #020417;
+    --font-title-clr: #9d9ab4;
+    --checkbox-primary-clr: #a056c5;
+    --checkbox-secondary-clr: #2643c4;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    background-color: var(--bg-primary-clr);
+}

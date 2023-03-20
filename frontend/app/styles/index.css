@@ -1,0 +1,18 @@
+.container {
+    position: relative;
+}
+.content {
+    min-inline-size: 320px;
+    max-inline-size: 720px;
+    min-block-size: 720px;
+    margin: 2em;
+    padding: 2em;
+    display: grid;
+
+    grid-template-rows: min-content min-content auto min-content;
+    gap: 1em;
+}
+
+.add-task-button {
+    position: absolute;
+}
