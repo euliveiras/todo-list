@@ -6,7 +6,8 @@ import { TasksRepository } from '../repositories/task-repository';
 export interface UpdateTaskDTO {
   label: string;
   additionalInfo?: string;
-  categories: CategoryType[];
+  category: CategoryType;
+  updatedAt?: Date;
 }
 
 @Injectable()
@@ -16,7 +17,7 @@ export class UpdateTask {
   async execute(id: string, props: UpdateTaskDTO): Promise<{ data: Task }> {
     const updatedTask = await this.tasksRepository.update(id, {
       ...props,
-      categories: props.categories.map((v) => new Category(v)),
+      category: new Category(props.category),
     });
 
     return { data: updatedTask };

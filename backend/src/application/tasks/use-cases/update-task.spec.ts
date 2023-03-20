@@ -10,7 +10,7 @@ describe('Update task', () => {
     const updateTask = new UpdateTask(repository);
 
     await createTask.execute({
-      categories: ['Business'],
+      category: 'Business',
       label: 'study',
       ownerId: 'john-doe-id',
       expiration: new Date(),
@@ -19,7 +19,7 @@ describe('Update task', () => {
 
     expect(() => {
       return updateTask.execute('random-id', {
-        categories: ['Personal', 'Business'],
+        category: 'Personal',
         label: 'new-label',
       });
     }).rejects.toThrow();
@@ -31,7 +31,7 @@ describe('Update task', () => {
     const updateTask = new UpdateTask(repository);
 
     await createTask.execute({
-      categories: ['Business'],
+      category: 'Business',
       label: 'study',
       ownerId: 'john-doe-id',
       expiration: new Date(),
@@ -39,12 +39,38 @@ describe('Update task', () => {
     });
 
     updateTask.execute('some-id', {
-      categories: ['Personal', 'Business'],
+      category: 'Personal',
       label: 'new-label',
     });
 
     const { data } = await findTask.execute('some-id');
 
     expect(data).toHaveProperty('label', 'new-label');
+  });
+  it('should be able to set task updateAt field to present date', async () => {
+    const repository = new InMemoryTasksRepository();
+    const findTask = new FindTaskById(repository);
+    const createTask = new CreateTask(repository);
+    const updateTask = new UpdateTask(repository);
+
+    const updatedAt = new Date();
+
+    await createTask.execute({
+      category: 'Business',
+      label: 'study',
+      ownerId: 'john-doe-id',
+      expiration: new Date(),
+      id: 'some-id',
+    });
+
+    updateTask.execute('some-id', {
+      category: 'Personal',
+      label: 'new-label',
+      updatedAt,
+    });
+
+    const { data } = await findTask.execute('some-id');
+
+    expect(data).toHaveProperty('updatedAt', updatedAt);
   });
 });

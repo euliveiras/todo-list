@@ -8,7 +8,7 @@ interface CreateTaskDTO {
   label: string;
   additionalInfo?: string;
   expiration: Date;
-  categories: CategoryType[];
+  category: CategoryType;
   ownerId: string;
 }
 
@@ -23,7 +23,7 @@ export class CreateTask {
         label: task.label,
         ownerId: task.ownerId,
         additionalInfo: task.additionalInfo,
-        categories: task.categories.map((v) => new Category(v)),
+        category: new Category(task.category),
       },
       task.id,
     );

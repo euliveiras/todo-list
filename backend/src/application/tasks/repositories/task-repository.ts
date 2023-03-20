@@ -4,7 +4,7 @@ import { Task } from '../entities/task';
 export interface UpdateTaskDTO {
   label: string;
   additionalInfo?: string;
-  categories: Category[];
+  category: Category;
 }
 
 export abstract class TasksRepository {

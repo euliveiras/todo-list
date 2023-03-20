@@ -6,7 +6,7 @@ describe('Create task', () => {
     const createTask = new CreateTask(new InMemoryTasksRepository());
 
     await createTask.execute({
-      categories: ['Business'],
+      category: 'Business',
       label: 'study',
       ownerId: 'fake-id',
       expiration: new Date(),

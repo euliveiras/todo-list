@@ -1,4 +1,3 @@
-import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { Category } from './category';
 
@@ -6,7 +5,7 @@ interface TaskProps {
   label: string;
   additionalInfo?: string;
   expiration: Date;
-  categories: Category[];
+  category: Category;
   ownerId: string;
   createdAt: Date;
   updatedAt?: Date;
@@ -14,7 +13,6 @@ interface TaskProps {
 
 export type Replace<T, R> = Omit<T, keyof R> & R;
 
-@Injectable()
 export class Task {
   private _id: string;
   private props: TaskProps;
@@ -63,12 +61,12 @@ export class Task {
     return this.props.expiration;
   }
 
-  public get categories() {
-    return this.props.categories;
+  public get category(): Category {
+    return this.props.category;
   }
 
-  public set categories(categories: Category[]) {
-    this.props.categories = categories;
+  public set category(category: Category) {
+    this.props.category = category;
   }
 
   public get ownerId() {

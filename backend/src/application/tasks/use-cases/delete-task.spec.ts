@@ -11,7 +11,7 @@ describe('Delete task', () => {
     const deleteTask = new DeleteTask(repository);
 
     await createTask.execute({
-      categories: ['Business'],
+      category: 'Business',
       label: 'study',
       ownerId: 'john-doe-id',
       expiration: new Date(),

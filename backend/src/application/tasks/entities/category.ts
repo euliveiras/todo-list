@@ -1,10 +1,7 @@
-import { Injectable } from '@nestjs/common';
-
 export const categories = ['Personal', 'Business'] as Array<CategoryType>;
 
 export type CategoryType = 'Personal' | 'Business';
 
-@Injectable()
 export class Category {
   private _category: CategoryType;
 
