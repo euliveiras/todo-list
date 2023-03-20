@@ -6,7 +6,7 @@ interface TaskProps {
   label: string;
   additionalInfo?: string;
   expiration: Date;
-  categories: Category;
+  categories: Category[];
   ownerId: string;
   createdAt: Date;
   updatedAt?: Date;
@@ -19,8 +19,8 @@ export class Task {
   private _id: string;
   private props: TaskProps;
 
-  constructor(props: Replace<TaskProps, { createdAt?: Date }>, _id?: string) {
-    this._id = _id ?? randomUUID();
+  constructor(props: Replace<TaskProps, { createdAt?: Date }>, id?: string) {
+    this._id = id ?? randomUUID();
 
     this.validateLabel(props.label);
 
@@ -67,7 +67,7 @@ export class Task {
     return this.props.categories;
   }
 
-  public set categories(categories: Category) {
+  public set categories(categories: Category[]) {
     this.props.categories = categories;
   }
 

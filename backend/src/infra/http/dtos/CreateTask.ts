@@ -1,7 +1,9 @@
+import { CategoryType } from 'src/application/tasks/entities/category';
+
 export interface CreateTaskDTO {
   label: string;
   additionalInfo?: string;
   expiration: Date;
-  categories: string;
+  categories: CategoryType[];
   ownerId: string;
 }

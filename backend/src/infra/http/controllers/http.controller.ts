@@ -9,7 +9,7 @@ export class HttpController {
   }
 
   @Post()
-  createTask(task: CreateTaskDTO) {
-    
+  async createTask(task: CreateTaskDTO) {
+    await this.createTask(task);
   }
 }
