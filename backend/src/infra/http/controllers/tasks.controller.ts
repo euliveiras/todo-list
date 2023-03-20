@@ -25,7 +25,7 @@ export class TasksController {
     private deleteTask: DeleteTask,
   ) {}
   @Get(':id')
-  async findAll(@Param('id') id: string) {
+  async findManyByOwner(@Param('id') id: string) {
     const tasks = await this.findMany.execute(id);
     return { data: tasks.map((task) => HttpMapper.toHttp(task)) };
   }
