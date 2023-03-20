@@ -1,14 +1,14 @@
-import { CategoryType } from '../entities/category';
+import { Category } from '../entities/category';
 import { Task } from '../entities/task';
 
-interface UpdateTaskDTO {
+export interface UpdateTaskDTO {
   label: string;
   additionalInfo?: string;
-  categories: CategoryType[];
+  categories: Category[];
 }
 
 export abstract class TasksRepository {
   abstract create(task: Task): Promise<void>;
-  abstract update(task: UpdateTaskDTO): Promise<Task>;
+  abstract update(id: string, props: UpdateTaskDTO): Promise<Task>;
   abstract findById(taskId: string): Promise<Task>;
 }
