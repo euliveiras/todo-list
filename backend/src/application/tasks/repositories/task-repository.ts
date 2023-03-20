@@ -11,4 +11,5 @@ export abstract class TasksRepository {
   abstract create(task: Task): Promise<void>;
   abstract update(id: string, props: UpdateTaskDTO): Promise<Task>;
   abstract findById(taskId: string): Promise<Task>;
+  abstract deleteById(taskId: string): Promise<void>;
 }
