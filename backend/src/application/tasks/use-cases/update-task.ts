@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { Category, CategoryType } from '../entities/category';
-import { Task } from '../entities/task';
 import { TasksRepository } from '../repositories/task-repository';
 
 export interface UpdateTaskDTO {
-  label: string;
+  label?: string;
   additionalInfo?: string;
-  category: CategoryType;
+  expiration?: Date;
+  category?: CategoryType;
   updatedAt?: Date;
 }
 
@@ -14,12 +14,10 @@ export interface UpdateTaskDTO {
 export class UpdateTask {
   constructor(private tasksRepository: TasksRepository) {}
 
-  async execute(id: string, props: UpdateTaskDTO): Promise<{ data: Task }> {
-    const updatedTask = await this.tasksRepository.update(id, {
+  async execute(id: string, props: UpdateTaskDTO): Promise<void> {
+    await this.tasksRepository.update(id, {
       ...props,
-      category: new Category(props.category),
+      category: props.category ? new Category(props.category) : null,
     });
-
-    return { data: updatedTask };
   }
 }

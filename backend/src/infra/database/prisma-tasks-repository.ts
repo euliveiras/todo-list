@@ -25,13 +25,26 @@ export class PrismaTasksRepository implements TasksRepository {
 
     return tasks.map((t) => PrismaTasksMapper.toDomain(t));
   }
-  update(id: string, props: UpdateTaskDTO): Promise<Task> {
-    throw new Error('Method not implemented.');
+  async update(id: string, data: UpdateTaskDTO): Promise<void> {
+    await this.prisma.task.update({
+      where: {
+        id,
+      },
+      data: {
+        additionalInfo: data.additionalInfo,
+        label: data.label,
+        category: data.category?.category,
+      },
+    });
   }
   findById(taskId: string): Promise<Task> {
     throw new Error('Method not implemented.');
   }
-  deleteById(taskId: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  async deleteById(id: string): Promise<void> {
+    await this.prisma.task.delete({
+      where: {
+        id,
+      },
+    });
   }
 }

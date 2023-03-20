@@ -1,8 +1,6 @@
 import { InMemoryTasksRepository } from '../../../../test/repositories/In-memory-tasks-repository';
 import { CreateTask } from './create-task';
-import { DeleteTask } from './delete-task';
 import { FindManyTasksByOwner } from './find-many-tasks-by-owner';
-import { FindTaskById } from './find-task';
 
 describe('Find many tasks', () => {
   it('should be able to find tasks', async () => {

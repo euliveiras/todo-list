@@ -15,7 +15,7 @@ export class InMemoryTasksRepository implements TasksRepository {
     this.tasks = newTasks;
   }
 
-  async update(taskId: string, props: UpdateTaskDTO): Promise<Task> {
+  async update(taskId: string, props: UpdateTaskDTO): Promise<void> {
     const index = this.tasks.findIndex((v) => v.id === taskId);
 
     if (index === -1) {
@@ -47,8 +47,6 @@ export class InMemoryTasksRepository implements TasksRepository {
     );
 
     this.tasks[index] = newTask;
-
-    return newTask;
   }
   async findById(taskId: string): Promise<Task> {
     return this.tasks.find((t) => t.id === taskId);
