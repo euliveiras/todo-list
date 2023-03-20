@@ -1,12 +1,51 @@
-import { UpdateTaskDTO } from 'src/application/tasks/use-cases/update-task';
 import { Task } from '../../src/application/tasks/entities/task';
-import { TasksRepository } from '../../src/application/tasks/repositories/task-repository';
+import {
+  TasksRepository,
+  UpdateTaskDTO,
+} from '../../src/application/tasks/repositories/task-repository';
 
 export class InMemoryTasksRepository implements TasksRepository {
   private tasks: Task[] = [];
 
-  async update(task: UpdateTaskDTO): Promise<Task> {
-    throw new Error('Method not implemented.');
+  async deleteById(taskId: string): Promise<void> {
+    const newTasks = this.tasks.filter((t) => t.id !== taskId);
+    this.tasks = newTasks;
+  }
+
+  async update(taskId: string, props: UpdateTaskDTO): Promise<Task> {
+    const index = this.tasks.findIndex((v) => v.id === taskId);
+
+    if (index === -1) {
+      throw new Error('Task not finded');
+    }
+
+    const {
+      additionalInfo,
+      category,
+      createdAt,
+      expiration,
+      id,
+      label,
+      ownerId,
+    } = this.tasks[index];
+
+    const newTask = new Task(
+      {
+        additionalInfo,
+        category,
+        createdAt,
+        expiration,
+        label,
+        ownerId,
+        ...props,
+        updatedAt: new Date(),
+      },
+      id,
+    );
+
+    this.tasks[index] = newTask;
+
+    return newTask;
   }
   async findById(taskId: string): Promise<Task> {
     return this.tasks.find((t) => t.id === taskId);

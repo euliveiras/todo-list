@@ -16,7 +16,7 @@ interface CreateTaskDTO {
 export class CreateTask {
   constructor(private tasksRepository: TasksRepository) {}
 
-  async execute(task: CreateTaskDTO): Promise<void> {
+  async execute(task: CreateTaskDTO): Promise<Task> {
     const newTask = new Task(
       {
         expiration: task.expiration,
@@ -28,5 +28,7 @@ export class CreateTask {
       task.id,
     );
     await this.tasksRepository.create(newTask);
+
+    return newTask;
   }
 }
