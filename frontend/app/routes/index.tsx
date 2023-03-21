@@ -1,13 +1,12 @@
 import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { ActionArgs, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 
 import indexCss from "../styles/index.css";
 import categoriesCss from "../styles/categories.css";
 import categoriesCardCss from "../styles/categories-cards.css";
-import type { LinksFunction, LoaderArgs } from "@remix-run/node";
+import type { LinksFunction, LoaderArgs, ActionArgs } from "@remix-run/node";
 import Categories from "~/components/Categories";
 import { Outlet } from "@remix-run/react";
 import Tasks from "~/components/Tasks";
@@ -99,9 +98,9 @@ export default function IndexRoute() {
 
                 <Tasks data={data.tasks} />
 
-                <Button variant="contained" className="add-task-button">
+                <Link to="/tasks/new" className="add-task-button">
                     <AddOutlinedIcon />
-                </Button>
+                </Link>
                 <Outlet />
             </Paper>
         </main>

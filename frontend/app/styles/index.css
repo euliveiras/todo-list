@@ -2,6 +2,7 @@
     position: relative;
 }
 .content {
+    position: relative;
     min-inline-size: 300px;
     max-inline-size: 720px;
     min-block-size: 720px;
@@ -18,6 +19,25 @@
         margin: 10%;
     }
 }
+
+@media (min-width: 720px) {
+    .content {
+        margin-block: 5%;
+        margin-inline: auto;
+    }
+}
 .add-task-button {
     position: absolute;
+    bottom: 10%;
+    right: 18%;
+    padding: 1em;
+    inline-size: 64px;
+    border-radius: 9999999px;
+    background-color: var(--checkbox-secondary-clr);
+    display: grid;
+    place-content: center;
+}
+
+.add-task-button > * {
+    color: whitesmoke;
 }
