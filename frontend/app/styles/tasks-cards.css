@@ -1,0 +1,28 @@
+.tasks__card {
+    display: flex;
+    align-items: center;
+    padding-inline-start: 1em;
+}
+
+.btns-container {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    gap: 0.325em;
+    padding-inline: 1em;
+    margin-inline-start: auto;
+}
+
+.btns-container > * {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+input[type="checkbox"] ~ p {
+    margin-inline-start: 1em;
+}
+
+input[type="checkbox"]:checked ~ p {
+    text-decoration: line-through;
+    margin-inline-start: 1em;
+}

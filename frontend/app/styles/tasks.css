@@ -1,0 +1,18 @@
+.tasks {
+    overflow-x: hidden;
+}
+
+.tasks__label {
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    color: var(--font-title-clr);
+}
+.tasks__cards {
+    padding-block: 2em;
+    display: grid;
+    gap: 1em;
+    grid-auto-rows: 60px;
+    overflow-x: scroll;
+}

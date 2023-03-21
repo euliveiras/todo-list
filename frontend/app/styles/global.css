@@ -1,7 +1,8 @@
 :root {
     --font-body: Ubuntu, sans-serif;
     --bg-primary-clr: #adbaeb;
-    --card-primary-clr: #f4f6fd;
+    --card-primary-clr: #f6f5f4;
+    --category-card-primary-clr: #f4f6fd;
     --font-body-clr: #020417;
     --font-title-clr: #9d9ab4;
     --checkbox-primary-clr: #a056c5;

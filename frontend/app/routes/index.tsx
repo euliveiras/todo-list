@@ -1,7 +1,7 @@
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { json } from "@remix-run/node";
+import { ActionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 import indexCss from "../styles/index.css";
@@ -10,19 +10,22 @@ import categoriesCardCss from "../styles/categories-cards.css";
 import type { LinksFunction, LoaderArgs } from "@remix-run/node";
 import Categories from "~/components/Categories";
 import { Outlet } from "@remix-run/react";
+import Tasks from "~/components/Tasks";
+import tasksCss from "../styles/tasks.css";
+import tasksCardsCss from "../styles/tasks-cards.css";
 
-type Tasks = {
+type ITasks = {
     id: string;
     category: string;
     label: string;
     additionalInfo?: string;
-    createdAt: Date;
+    createdAt: string;
     ownerId: string;
-    expiration: Date;
+    expiration: string;
 };
 
 type JSONResponse = {
-    data: Array<Tasks>;
+    data: Array<ITasks>;
     errors?: Array<{ message: string }>;
 };
 
@@ -31,7 +34,26 @@ export const links: LinksFunction = () => {
         { rel: "stylesheet", href: indexCss },
         { rel: "stylesheet", href: categoriesCss },
         { rel: "stylesheet", href: categoriesCardCss },
+        { rel: "stylesheet", href: tasksCss },
+        { rel: "stylesheet", href: tasksCardsCss },
     ];
+};
+
+export const action = async ({ request }: ActionArgs) => {
+    const method = request.method;
+    const text = await request.text();
+    const params = new URLSearchParams(text);
+
+    if (method === "DELETE") {
+        const data = Object.fromEntries(params);
+        await fetch(`http://localhost:3000/tasks/${data.id}`, { method });
+    }
+
+    if (method === "PATCH") {
+        const data = Object.fromEntries(params);
+        await fetch(`http://localhost:3000/tasks/${data.id}`, { method });
+    }
+    return null;
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
@@ -63,24 +85,20 @@ export default function IndexRoute() {
 
     return (
         <main className="container">
-            <Paper elevation={1} className="content">
+            <Paper
+                elevation={1}
+                className="content"
+                sx={{
+                    backgroundColor: "whitesmoke",
+                }}>
                 <header>
                     <h1>What's up!</h1>
                 </header>
 
                 <Categories data={data.categories} />
 
-                <section className="tasks">
-                    <h2 className="tasks__label">Today tasks</h2>
-                    <div className="tasks__cards">
-                        <div className="tasks__card">
-                            <label>
-                                <input type="checkbox" />
-                                Click me
-                            </label>
-                        </div>
-                    </div>
-                </section>
+                <Tasks data={data.tasks} />
+
                 <Button variant="contained" className="add-task-button">
                     <AddOutlinedIcon />
                 </Button>
