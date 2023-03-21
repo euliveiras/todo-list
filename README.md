@@ -5,8 +5,12 @@ todo list com frontend em remix.run e backend em nestjs
 
 > cd backend
 
+> npm i
+
 > npm run start
 
 > cd ../frontend
+
+> npm i
 
 > npm run dev
