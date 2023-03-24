@@ -1,9 +1,10 @@
 import { CategoryType } from 'src/application/tasks/entities/category';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class CreateTaskBody {
   @IsNotEmpty()
   @IsString()
+  @MinLength(2)
   label: string;
 
   additionalInfo?: string;
