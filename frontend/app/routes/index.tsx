@@ -54,10 +54,9 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-    const response = await fetch(
-        "http://localhost:3000/tasks/3ac4f5a9-44cd-464f-8897-9cec1f0e5ebf",
-        { method: "GET" }
-    );
+    const response = await fetch(`http://localhost:3000/tasks/${process.env.OWNER_ID}`, {
+        method: "GET",
+    });
 
     const { data }: JSONResponse = await response.json();
 
