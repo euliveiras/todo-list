@@ -2,7 +2,8 @@ import { Alert, Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import type { ActionArgs, LinksFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
+import { Form, useActionData, useNavigation } from "@remix-run/react";
+import { useEffect, useRef } from "react";
 import updateTaskCss from "../../../styles/update-task.css";
 
 export const links: LinksFunction = () => {
@@ -14,6 +15,8 @@ export const action = async ({ request }: ActionArgs) => {
     const values = Object.fromEntries(body);
     const categories = ["Personal", "Business"];
     const category = categories[Math.floor(Math.random() * categories.length)];
+
+    await Promise.resolve(new Promise((s) => setTimeout(s, 1500)));
 
     const data = JSON.stringify({
         ...values,
@@ -39,16 +42,27 @@ export const action = async ({ request }: ActionArgs) => {
 
 export default function TaskRoute() {
     const data = useActionData<typeof action>();
+    const navigation = useNavigation();
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const isSubmitting = navigation.state === "submitting";
+
+    useEffect(() => {
+        if (data && !data?.ok) {
+            inputRef.current?.focus();
+        }
+    });
+
     return (
         <Paper className="container">
             <h1>Create task</h1>
-            <Form className="form" method="post">
+            <Form replace className="form" method="post">
                 <label className="label">
                     <p>Task name</p>
-                    <input name="label" />
+                    <input ref={inputRef} name="label" />
                 </label>
                 <Button variant="contained" type="submit">
-                    Save
+                    {isSubmitting ? "Salvando..." : "Salvar"}
                 </Button>
                 {data && !data?.ok && <Alert severity="error">{data?.message}</Alert>}
             </Form>

@@ -44,17 +44,17 @@ export const action = async ({ request }: ActionArgs) => {
     const data = Object.fromEntries(body);
 
     if (method === "DELETE") {
-        await fetch(`http://localhost:3000/tasks/${data.id}`, { method });
+        await fetch(`${process.env.API_ADDRESS}/tasks/${data.id}`, { method });
     }
 
     if (method === "PATCH") {
-        await fetch(`http://localhost:3000/tasks/${data.id}`, { method });
+        await fetch(`${process.env.API_ADDRESS}/tasks/${data.id}`, { method });
     }
     return null;
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-    const response = await fetch(`http://localhost:3000/tasks/${process.env.OWNER_ID}`, {
+    const response = await fetch(`${process.env.API_ADDRESS}/tasks/${process.env.OWNER_ID}`, {
         method: "GET",
     });
 
