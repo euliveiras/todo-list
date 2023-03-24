@@ -40,16 +40,14 @@ export const links: LinksFunction = () => {
 
 export const action = async ({ request }: ActionArgs) => {
     const method = request.method;
-    const text = await request.text();
-    const params = new URLSearchParams(text);
+    const body = await request.formData();
+    const data = Object.fromEntries(body);
 
     if (method === "DELETE") {
-        const data = Object.fromEntries(params);
         await fetch(`http://localhost:3000/tasks/${data.id}`, { method });
     }
 
     if (method === "PATCH") {
-        const data = Object.fromEntries(params);
         await fetch(`http://localhost:3000/tasks/${data.id}`, { method });
     }
     return null;
