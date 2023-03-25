@@ -20,7 +20,7 @@ export default function Task({ label, id }: TaskProps) {
 
             <Form method="delete" className="btns-container">
                 <input type="hidden" name="id" value={id} />
-                <Link to={`/tasks/update/${id}`}>
+                <Link to={`/tasks/update/${id}`} className="edit-btn">
                     <EditOutlinedIcon />
                 </Link>
                 <Button
@@ -29,6 +29,8 @@ export default function Task({ label, id }: TaskProps) {
                         minWidth: "0",
                         display: "grid",
                         placeContent: "center",
+                        color: "gray",
+                        transition: "opacity 0.2s"
                     }}
                     variant="text"
                     type="submit"
