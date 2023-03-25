@@ -1,29 +1,43 @@
 import Paper from "@mui/material/Paper";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { Link, useFetcher } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
+import Button from "@mui/material/Button";
 
 type TaskProps = {
     label: string;
     id: string;
 };
-export default function Task({ label, id }: TaskProps) {
-    const fetcher = useFetcher();
-    const handleDelete = () => {
-        fetcher.submit({ id, label }, { method: "delete" });
-    };
 
+export default function Task({ label, id }: TaskProps) {
     return (
-        <Paper className="tasks__card" sx={{ boxShadow: "0", borderRadius: "1em" }}>
-            <input type="checkbox" name={label} />
-            <p>{label}</p>
-            <span className="btns-container">
-                <input type="hidden" value={id} />
-                <Link to={`/tasks/update/${id}`}>
+        <Paper key={id} className="tasks__card" sx={{ boxShadow: "0", borderRadius: "1em" }}>
+            <input id="task-checkbox" type="checkbox" name={label} className="card__checkbox" />
+
+            <label htmlFor="task-checkbox" className="card__checkbox-label">
+                {label}
+            </label>
+
+            <Form method="delete" className="btns-container">
+                <input type="hidden" name="id" value={id} />
+                <Link to={`/tasks/update/${id}`} className="edit-btn">
                     <EditOutlinedIcon />
                 </Link>
-                <DeleteOutlineOutlinedIcon onClick={handleDelete} />
-            </span>
+                <Button
+                    sx={{
+                        padding: "0",
+                        minWidth: "0",
+                        display: "grid",
+                        placeContent: "center",
+                        color: "gray",
+                        transition: "opacity 0.2s"
+                    }}
+                    variant="text"
+                    type="submit"
+                    className="delete-btn">
+                    <DeleteOutlineOutlinedIcon />
+                </Button>
+            </Form>
         </Paper>
     );
 }

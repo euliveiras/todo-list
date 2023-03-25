@@ -40,26 +40,23 @@ export const links: LinksFunction = () => {
 
 export const action = async ({ request }: ActionArgs) => {
     const method = request.method;
-    const text = await request.text();
-    const params = new URLSearchParams(text);
+    const body = await request.formData();
+    const data = Object.fromEntries(body);
 
     if (method === "DELETE") {
-        const data = Object.fromEntries(params);
-        await fetch(`http://localhost:3000/tasks/${data.id}`, { method });
+        await fetch(`${process.env.API_ADDRESS}/tasks/${data.id}`, { method });
     }
 
     if (method === "PATCH") {
-        const data = Object.fromEntries(params);
-        await fetch(`http://localhost:3000/tasks/${data.id}`, { method });
+        await fetch(`${process.env.API_ADDRESS}/tasks/${data.id}`, { method });
     }
     return null;
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-    const response = await fetch(
-        "http://localhost:3000/tasks/3ac4f5a9-44cd-464f-8897-9cec1f0e5ebf",
-        { method: "GET" }
-    );
+    const response = await fetch(`${process.env.API_ADDRESS}/tasks/${process.env.OWNER_ID}`, {
+        method: "GET",
+    });
 
     const { data }: JSONResponse = await response.json();
 

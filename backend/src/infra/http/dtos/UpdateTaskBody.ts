@@ -1,9 +1,10 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString, MinLength } from 'class-validator';
 import { CategoryType } from 'src/application/tasks/entities/category';
 
 export class UpdateTaskBody {
   @IsOptional()
   @IsString()
+  @MinLength(2)
   label?: string;
 
   @IsOptional()
