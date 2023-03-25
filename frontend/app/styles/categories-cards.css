@@ -5,6 +5,14 @@
     line-height: 0.625;
 }
 
+.categories__card:nth-of-type(n) {
+    --bg-clr: var(--checkbox-primary-clr);
+}
+
+.categories__card:nth-of-type(2n) {
+    --bg-clr: var(--checkbox-secondary-clr);
+}
+
 .card__title {
     font-size: 0.825rem;
     font-weight: 500;
@@ -19,8 +27,8 @@
 
 .card__bar {
     padding: 2px;
-    background-color: var(--checkbox-primary-clr);
     position: absolute;
+    background-color: var(--bg-clr);
     left: 0;
     right: 0;
     margin-inline: 1em;
