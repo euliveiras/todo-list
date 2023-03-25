@@ -4,22 +4,12 @@
     padding-inline-start: 1em;
 }
 
-.tasks__card:nth-of-type(n) .card__checkbox[type="checkbox"] {
-    border-color: var(--checkbox-primary-clr);
+.tasks__card:nth-of-type(n) {
+    --clr: var(--checkbox-primary-clr);
 }
 
-.tasks__card:nth-of-type(n) .card__checkbox[type="checkbox"]:checked {
-    background-color: var(--bg-primary-clr);
-    border-color: var(--bg-primary-clr);
-}
-
-.tasks__card:nth-of-type(2n) .card__checkbox[type="checkbox"] {
-    border-color: var(--checkbox-secondary-clr);
-}
-
-.tasks__card:nth-of-type(2n) .card__checkbox[type="checkbox"]:checked {
-    background-color: var(--bg-primary-clr);
-    border-color: var(--bg-primary-clr);
+.tasks__card:nth-of-type(2n) {
+    --clr: var(--checkbox-secondary-clr);
 }
 
 .btns-container {
@@ -31,6 +21,26 @@
     margin-inline-start: auto;
 }
 
+.edit-btn {
+    appearance: none;
+    display: grid;
+    place-content: center;
+    color: gray;
+    opacity: 0.8;
+}
+
+.delete-btn {
+    opacity: 0.8;
+}
+
+.edit-btn, .delete-btn {
+    transition: opacity 0.2s;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+    opacity: 1;
+}
+
 .card__checkbox {
     appearance: none;
     padding: 0.6rem;
@@ -38,6 +48,12 @@
     border-width: 0.125rem;
     border-style: solid;
     position: relative;
+    border-color: var(--clr);
+}
+
+.card__checkbox[type="checkbox"]:checked {
+    background-color: var(--bg-primary-clr);
+    border-color: var(--bg-primary-clr);
 }
 
 .card__checkbox:checked::before {
