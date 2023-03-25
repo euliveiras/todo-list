@@ -4,6 +4,24 @@
     padding-inline-start: 1em;
 }
 
+.tasks__card:nth-of-type(n) .card__checkbox[type="checkbox"] {
+    border-color: var(--checkbox-primary-clr);
+}
+
+.tasks__card:nth-of-type(n) .card__checkbox[type="checkbox"]:checked {
+    background-color: var(--bg-primary-clr);
+    border-color: var(--bg-primary-clr);
+}
+
+.tasks__card:nth-of-type(2n) .card__checkbox[type="checkbox"] {
+    border-color: var(--checkbox-secondary-clr);
+}
+
+.tasks__card:nth-of-type(2n) .card__checkbox[type="checkbox"]:checked {
+    background-color: var(--bg-primary-clr);
+    border-color: var(--bg-primary-clr);
+}
+
 .btns-container {
     display: grid;
     grid-auto-flow: column;
@@ -13,23 +31,36 @@
     margin-inline-start: auto;
 }
 
-.btns-container > * {
-    pointer-events: auto;
+.card__checkbox {
+    appearance: none;
+    padding: 0.6rem;
+    border-radius: 20px;
+    border-width: 0.125rem;
+    border-style: solid;
+    position: relative;
+}
+
+.card__checkbox:checked::before {
+    content: "✔";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    color: whitesmoke;
+    background-color: inherit;
+    display: grid;
+    place-content: center;
+}
+
+.card__checkbox,
+.card__checkbox-label {
     cursor: pointer;
 }
 
-.card__checkbox {
-    appearance: none;
-    border: 1px solid red;
-    padding: 0.6rem;
-    border-radius: 20px;
-}
-
-.card__checkbox[type="checkbox"] ~ p {
+.card__checkbox[type="checkbox"] ~ .card__checkbox-label {
     margin-inline-start: 1em;
 }
 
-.card__checkbox[type="checkbox"]:checked ~ p {
+.card__checkbox[type="checkbox"]:checked ~ .card__checkbox-label {
     text-decoration: line-through;
     margin-inline-start: 1em;
 }
