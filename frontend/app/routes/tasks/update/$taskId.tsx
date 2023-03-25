@@ -33,7 +33,7 @@ export const action = async ({ request }: ActionArgs) => {
 
     const body = JSON.stringify({ label });
 
-    await fetch(`http://localhost:3000/tasks/${id}`, {
+    await fetch(`${process.env.API_ADDRESS}/tasks/${id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -47,10 +47,9 @@ export const action = async ({ request }: ActionArgs) => {
 export const loader = async ({ params }: LoaderArgs) => {
     const taskId = params.taskId;
 
-    const response = await fetch(
-        "http://localhost:3000/tasks/3ac4f5a9-44cd-464f-8897-9cec1f0e5ebf",
-        { method: "GET" }
-    );
+    const response = await fetch(`${process.env.API_ADDRESS}/tasks/${process.env.OWNER_ID}`, {
+        method: "GET",
+    });
 
     const { data }: JSONResponse = await response.json();
 
