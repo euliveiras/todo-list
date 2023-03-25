@@ -18,11 +18,18 @@
     cursor: pointer;
 }
 
-input[type="checkbox"] ~ p {
+.card__checkbox {
+    appearance: none;
+    border: 1px solid red;
+    padding: 0.6rem;
+    border-radius: 20px;
+}
+
+.card__checkbox[type="checkbox"] ~ p {
     margin-inline-start: 1em;
 }
 
-input[type="checkbox"]:checked ~ p {
+.card__checkbox[type="checkbox"]:checked ~ p {
     text-decoration: line-through;
     margin-inline-start: 1em;
 }
