@@ -11,9 +11,13 @@ type TaskProps = {
 
 export default function Task({ label, id }: TaskProps) {
     return (
-        <Paper className="tasks__card" sx={{ boxShadow: "0", borderRadius: "1em" }}>
-            <input type="checkbox" name={label} />
-            <p>{label}</p>
+        <Paper key={id} className="tasks__card" sx={{ boxShadow: "0", borderRadius: "1em" }}>
+            <input id="task-checkbox" type="checkbox" name={label} className="card__checkbox" />
+
+            <label htmlFor="task-checkbox" className="card__checkbox-label">
+                {label}
+            </label>
+
             <Form method="delete" className="btns-container">
                 <input type="hidden" name="id" value={id} />
                 <Link to={`/tasks/update/${id}`}>
