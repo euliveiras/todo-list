@@ -30,3 +30,25 @@
     display: grid;
     gap: 1em;
 }
+
+.task-name {
+    border: none;
+    outline: none;
+    font-size: 1.8rem;
+}
+
+.task-name:focus,
+.task-note:focus {
+    border-left: 2px solid gray;
+}
+
+.task-note {
+    resize: none;
+    border: none;
+    outline: none;
+}
+
+.task-expiration {
+    color: var(--font-title-clr);
+    border: none;
+}

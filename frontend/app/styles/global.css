@@ -26,3 +26,11 @@ body {
     min-height: 100vh;
     background-color: var(--bg-primary-clr);
 }
+
+input,
+select,
+textarea,
+button {
+    font-family: inherit;
+    font-size: 100%;
+}

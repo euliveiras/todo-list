@@ -29,7 +29,6 @@ export const action = async ({ request }: ActionArgs) => {
     const form = await request.formData();
     const label = form.get("label");
     const id = form.get("id");
-    console.log(id, label);
 
     const body = JSON.stringify({ label });
 
