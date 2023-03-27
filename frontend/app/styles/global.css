@@ -34,3 +34,25 @@ button {
     font-family: inherit;
     font-size: 100%;
 }
+
+.styled-paper {
+    min-inline-size: 300px;
+    max-inline-size: 720px;
+    min-block-size: 720px;
+    margin: 5%;
+    padding: 2em;
+    position: relative;
+}
+
+@media (min-width: 420px) {
+    .styled-paper {
+        margin: 10%;
+    }
+}
+
+@media (min-width: 720px) {
+    .styled-paper {
+        margin-block: 5%;
+        margin-inline: auto;
+    }
+}

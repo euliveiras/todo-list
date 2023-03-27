@@ -1,20 +1,20 @@
-.container {
+/* .container {
     position: relative;
-}
+} */
 .content {
     position: relative;
-    min-inline-size: 300px;
+    /* min-inline-size: 300px;
     max-inline-size: 720px;
     min-block-size: 720px;
     margin: 5%;
-    padding: 2em;
+    padding: 2em; */
     display: grid;
 
     grid-template-rows: min-content min-content auto min-content;
     gap: 1em;
 }
 
-@media (min-width: 420px) {
+/* @media (min-width: 420px) {
     .content {
         margin: 10%;
     }
@@ -25,7 +25,7 @@
         margin-block: 5%;
         margin-inline: auto;
     }
-}
+} */
 .add-task-button {
     position: absolute;
     bottom: 5%;

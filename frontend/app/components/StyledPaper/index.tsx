@@ -9,7 +9,7 @@ export default function StyledPaper({ className, ...props }: StyledPaperProps) {
     return (
         <Paper
             {...props}
-            className={className}
+            className={`styled-paper ${className}`}
             sx={{
                 borderRadius: "42px",
                 ...props.sx,

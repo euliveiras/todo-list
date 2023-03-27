@@ -1,4 +1,4 @@
-.container {
+/* .container {
     min-inline-size: 300px;
     max-inline-size: 720px;
     min-block-size: 720px;
@@ -18,7 +18,7 @@
         margin-block: 5%;
         margin-inline: auto;
     }
-}
+} */
 
 .close-btn {
     border: 2px solid var(--font-title-clr);
