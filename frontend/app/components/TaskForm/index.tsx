@@ -63,7 +63,7 @@ export default function TaskForm({ data, children, error }: TaskFormProps) {
 
                     <FormControl
                         sx={{
-                            inlineSize: "200px",
+                            minInlineSize: "200px",
                         }}>
                         <InputLabel id="category-label">Category</InputLabel>
 
