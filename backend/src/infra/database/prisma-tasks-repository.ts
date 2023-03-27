@@ -34,6 +34,7 @@ export class PrismaTasksRepository implements TasksRepository {
         additionalInfo: data.additionalInfo,
         label: data.label,
         category: data.category?.category,
+        expiration: data.expiration,
       },
     });
   }

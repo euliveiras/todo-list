@@ -48,6 +48,7 @@ export class TasksController {
     @Param('id') id: string,
     @Body(new ValidationPipe()) body: UpdateTaskBody,
   ) {
+    console.log(body);
     return this.updateTask.execute(id, body);
   }
 

@@ -57,7 +57,6 @@ button {
     }
 }
 
-
 .close-btn {
     border: 2px solid var(--font-title-clr);
     inline-size: 36px;
@@ -74,4 +73,41 @@ button {
 
 .close-btn:hover {
     opacity: 1;
+}
+
+.task__form {
+    display: grid;
+    gap: 1em;
+}
+
+.task__form-name {
+    border: none;
+    outline: none;
+    font-size: 1.8rem;
+    padding-inline-start: .8em;
+}
+
+.task__form-name:focus,
+.task__form-note:focus {
+    border-left: 2px solid gray;
+}
+
+.task__form-note {
+    resize: none;
+    border: none;
+    outline: none;
+    padding-inline-start: .8em;
+}
+
+.task-expiration {
+    color: var(--font-title-clr);
+    border: none;
+}
+
+.task__form-expiration-category-span {
+    display: grid;
+    grid-auto-flow: column;
+    place-content: start;
+    gap: 1em;
+    padding-inline-start: .8em;
 }

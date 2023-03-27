@@ -1,10 +1,10 @@
-import { Button } from "@mui/material";
+import Alert from "@mui/material/Alert";
 import type { ActionArgs, LinksFunction, LoaderArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
-import BackButton from "~/components/shared/BackButton";
+import { useActionData, useLoaderData } from "@remix-run/react";
 import StyledPaper from "~/components/shared/StyledPaper";
+import TaskForm from "~/components/TaskForm";
 import updateTaskCss from "../../../styles/update-task.css";
 
 type ITasks = {
@@ -27,19 +27,27 @@ export const links: LinksFunction = () => {
 };
 
 export const action = async ({ request }: ActionArgs) => {
-    const form = await request.formData();
-    const label = form.get("label");
-    const id = form.get("id");
+    const formData = await request.formData();
+    const values = Object.fromEntries(formData);
 
-    const body = JSON.stringify({ label });
+    const body = JSON.stringify({
+        label: values.label,
+        expiration: values.expiration,
+        additionalInfo: values.note,
+        category: values.category
+    });
 
-    await fetch(`${process.env.API_ADDRESS}/tasks/${id}`, {
+    const response = await fetch(`${process.env.API_ADDRESS}/tasks/${values.taskId}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
         },
         body,
     });
+
+    if (response.status === 400) {
+        return json({ ok: false, message: "label must contain 2 or more characters" });
+    }
 
     return redirect("/");
 };
@@ -59,21 +67,23 @@ export const loader = async ({ params }: LoaderArgs) => {
 };
 
 export default function TaskRoute() {
-    const data = useLoaderData<typeof loader>();
+    const { task } = useLoaderData<typeof loader>();
+    const actionData = useActionData<typeof action>();
+
     return (
         <StyledPaper className="container">
-            <BackButton to="/" />
-            <h1>Edit task</h1>
-            <Form className="form" method="patch">
-                <label className="label">
-                    <p>Task name</p>
-                    <input name="id" type="hidden" defaultValue={data.task?.id} />
-                    <input name="label" defaultValue={data.task?.label} />
-                </label>
-                <Button variant="contained" type="submit">
-                    Save
-                </Button>
-            </Form>
+            <TaskForm
+                data={{
+                    expiration: task?.expiration,
+                    label: task?.label,
+                    note: task?.additionalInfo,
+                    id: task?.id,
+                    category: task?.category
+                }}>
+                {actionData && !actionData?.ok && (
+                    <Alert severity="error">{actionData?.message}</Alert>
+                )}
+            </TaskForm>
         </StyledPaper>
     );
 }
