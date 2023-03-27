@@ -5,7 +5,7 @@ export class UpdateTaskBody {
   @IsOptional()
   @IsString()
   @MinLength(2)
-  label?: string;
+  label: string;
 
   @IsOptional()
   @IsString()
