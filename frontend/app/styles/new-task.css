@@ -8,6 +8,12 @@
     position: relative;
 }
 
+@media (min-width: 420px) {
+    .container {
+        margin: 10%;
+    }
+}
+
 .close-btn {
     border: 2px solid var(--font-title-clr);
     inline-size: 36px;
