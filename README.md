@@ -34,4 +34,3 @@ Now, we'll need to install and run our frontend too
 cd ../frontend
 npm run dev
 ```
-
