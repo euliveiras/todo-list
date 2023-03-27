@@ -1,10 +1,9 @@
-import { Button } from "@mui/material";
 import type { ActionArgs, LinksFunction, LoaderArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
-import BackButton from "~/components/shared/BackButton";
+import { useLoaderData } from "@remix-run/react";
 import StyledPaper from "~/components/shared/StyledPaper";
+import TaskForm from "~/components/TaskForm";
 import updateTaskCss from "../../../styles/update-task.css";
 
 type ITasks = {
@@ -62,18 +61,13 @@ export default function TaskRoute() {
     const data = useLoaderData<typeof loader>();
     return (
         <StyledPaper className="container">
-            <BackButton to="/" />
-            <h1>Edit task</h1>
-            <Form className="form" method="patch">
-                <label className="label">
-                    <p>Task name</p>
-                    <input name="id" type="hidden" defaultValue={data.task?.id} />
-                    <input name="label" defaultValue={data.task?.label} />
-                </label>
-                <Button variant="contained" type="submit">
-                    Save
-                </Button>
-            </Form>
+            <TaskForm
+                data={{
+                    expiration: data.task?.expiration,
+                    label: data.task?.label,
+                    note: data.task?.additionalInfo,
+                }}
+            />
         </StyledPaper>
     );
 }

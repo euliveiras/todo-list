@@ -2,46 +2,60 @@ import { Button } from "@mui/material";
 import { Form, useNavigation } from "@remix-run/react";
 import DatePicker from "~/components/shared/DatePicker";
 import BackButton from "~/components/shared/BackButton";
-import type { RefObject } from "react";
+import { useEffect, useRef } from "react";
 
 type TaskFormProps = {
-    inputRef: RefObject<HTMLInputElement>;
     data?: {
         label?: string;
         note?: string;
         expiration?: string;
     };
     children?: React.ReactNode;
+    error?: Boolean;
 };
 
-export default function TaskForm({ data, inputRef, children }: TaskFormProps) {
+export default function TaskForm({ data, children, error }: TaskFormProps) {
     const navigation = useNavigation();
     const isSubmitting = navigation.state === "submitting";
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (error) {
+            inputRef.current?.focus();
+        }
+    });
 
     return (
         <>
-            <Form replace className="form" method="post">
+            <Form replace className="task__form" method="post">
                 <BackButton to="/" />
-                <label className="label" htmlFor="label-input" hidden>
+                <label className="task__form-label" htmlFor="label-input" hidden>
                     Task name
                 </label>
 
                 <input
                     placeholder="Enter a task name"
+                    defaultValue={data?.label}
                     id="label-input"
                     ref={inputRef}
                     name="label"
-                    className="task-name"
+                    className="task__form-name"
                     size={10}
                 />
 
-                <label hidden className="label-textarea" htmlFor="note-textarea">
+                <label hidden className="task-form__textarea" htmlFor="note-textarea">
                     notes
                 </label>
 
-                <textarea name="note" placeholder="Task notes" rows={8} className="task-note" />
+                <textarea
+                    name="note"
+                    defaultValue={data?.note}
+                    placeholder="Task notes"
+                    rows={8}
+                    className="task__form-note"
+                />
 
-                <DatePicker name="expiration" />
+                <DatePicker name="expiration" expiration={data?.expiration} />
 
                 <Button
                     variant="contained"

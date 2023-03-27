@@ -1,17 +1,9 @@
-import { Alert, Button } from "@mui/material";
-import type { ActionArgs, LinksFunction } from "@remix-run/node";
+import { Alert } from "@mui/material";
+import type { ActionArgs } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
-import { Form, useActionData, useNavigation } from "@remix-run/react";
-import { useEffect, useRef } from "react";
-import newTaskCss from "../../../styles/new-task.css";
-import DatePicker from "~/components/shared/DatePicker";
+import { useActionData } from "@remix-run/react";
 import StyledPaper from "~/components/shared/StyledPaper";
-import BackButton from "~/components/shared/BackButton";
 import TaskForm from "~/components/TaskForm";
-
-export const links: LinksFunction = () => {
-    return [{ rel: "stylesheet", href: newTaskCss }];
-};
 
 export const action = async ({ request }: ActionArgs) => {
     const formData = await request.formData();
@@ -21,6 +13,7 @@ export const action = async ({ request }: ActionArgs) => {
 
     const data = JSON.stringify({
         ...values,
+        additionalInfo: values.note,
         category,
         ownerId: process.env.OWNER_ID,
     });
@@ -42,17 +35,10 @@ export const action = async ({ request }: ActionArgs) => {
 
 export default function TaskRoute() {
     const data = useActionData<typeof action>();
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-        if (data && !data?.ok) {
-            inputRef.current?.focus();
-        }
-    });
 
     return (
         <StyledPaper className="container">
-            <TaskForm inputRef={inputRef}>
+            <TaskForm error={!data?.ok}>
                 {data && !data?.ok && <Alert severity="error">{data?.message}</Alert>}
             </TaskForm>
         </StyledPaper>
