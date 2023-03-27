@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 
 type TaskFormProps = {
     data?: {
+        id?: string;
         label?: string;
         note?: string;
         expiration?: string;
@@ -29,6 +30,7 @@ export default function TaskForm({ data, children, error }: TaskFormProps) {
         <>
             <Form replace className="task__form" method="post">
                 <BackButton to="/" />
+                {data?.id && <input defaultValue={data?.id} hidden name="taskId" />}
                 <label className="task__form-label" htmlFor="label-input" hidden>
                     Task name
                 </label>

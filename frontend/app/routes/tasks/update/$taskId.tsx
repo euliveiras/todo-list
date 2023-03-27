@@ -26,13 +26,16 @@ export const links: LinksFunction = () => {
 };
 
 export const action = async ({ request }: ActionArgs) => {
-    const form = await request.formData();
-    const label = form.get("label");
-    const id = form.get("id");
+    const formData = await request.formData();
+    const values = Object.fromEntries(formData);
 
-    const body = JSON.stringify({ label });
+    const body = JSON.stringify({
+        label: values.label,
+        expiration: values.expiration,
+        additionalInfo: values.note
+    });
 
-    await fetch(`${process.env.API_ADDRESS}/tasks/${id}`, {
+    await fetch(`${process.env.API_ADDRESS}/tasks/${values.taskId}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -66,6 +69,7 @@ export default function TaskRoute() {
                     expiration: data.task?.expiration,
                     label: data.task?.label,
                     note: data.task?.additionalInfo,
+                    id: data?.task?.id,
                 }}
             />
         </StyledPaper>
