@@ -1,9 +1,10 @@
 import { Button } from "@mui/material";
-import Paper from "@mui/material/Paper";
 import type { ActionArgs, LinksFunction, LoaderArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
+import BackButton from "~/components/shared/BackButton";
+import StyledPaper from "~/components/shared/StyledPaper";
 import updateTaskCss from "../../../styles/update-task.css";
 
 type ITasks = {
@@ -29,7 +30,6 @@ export const action = async ({ request }: ActionArgs) => {
     const form = await request.formData();
     const label = form.get("label");
     const id = form.get("id");
-    console.log(id, label);
 
     const body = JSON.stringify({ label });
 
@@ -61,7 +61,8 @@ export const loader = async ({ params }: LoaderArgs) => {
 export default function TaskRoute() {
     const data = useLoaderData<typeof loader>();
     return (
-        <Paper className="container">
+        <StyledPaper className="container">
+            <BackButton to="/" />
             <h1>Edit task</h1>
             <Form className="form" method="patch">
                 <label className="label">
@@ -73,6 +74,6 @@ export default function TaskRoute() {
                     Save
                 </Button>
             </Form>
-        </Paper>
+        </StyledPaper>
     );
 }

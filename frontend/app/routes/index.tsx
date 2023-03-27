@@ -1,4 +1,3 @@
-import Paper from "@mui/material/Paper";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
@@ -12,6 +11,7 @@ import { Outlet } from "@remix-run/react";
 import Tasks from "~/components/Tasks";
 import tasksCss from "../styles/tasks.css";
 import tasksCardsCss from "../styles/tasks-cards.css";
+import StyledPaper from "~/components/shared/StyledPaper";
 
 type ITasks = {
     id: string;
@@ -81,7 +81,7 @@ export default function IndexRoute() {
 
     return (
         <main className="container">
-            <Paper
+            <StyledPaper
                 elevation={1}
                 className="content"
                 sx={{
@@ -99,7 +99,7 @@ export default function IndexRoute() {
                     <AddOutlinedIcon />
                 </Link>
                 <Outlet />
-            </Paper>
+            </StyledPaper>
         </main>
     );
 }

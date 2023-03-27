@@ -26,3 +26,52 @@ body {
     min-height: 100vh;
     background-color: var(--bg-primary-clr);
 }
+
+input,
+select,
+textarea,
+button {
+    font-family: inherit;
+    font-size: 100%;
+}
+
+.styled-paper {
+    min-inline-size: 300px;
+    max-inline-size: 720px;
+    min-block-size: 720px;
+    margin: 5%;
+    padding: 2em;
+    position: relative;
+}
+
+@media (min-width: 420px) {
+    .styled-paper {
+        margin: 10%;
+    }
+}
+
+@media (min-width: 720px) {
+    .styled-paper {
+        margin-block: 5%;
+        margin-inline: auto;
+    }
+}
+
+
+.close-btn {
+    border: 2px solid var(--font-title-clr);
+    inline-size: 36px;
+    block-size: 36px;
+    border-radius: 99999px;
+    padding: 0.625em;
+    display: grid;
+    place-content: center;
+    color: black;
+    margin-inline-start: auto;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.close-btn:hover {
+    opacity: 1;
+}
