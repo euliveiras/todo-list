@@ -8,13 +8,13 @@ import TaskForm from "~/components/TaskForm";
 export const action = async ({ request }: ActionArgs) => {
     const formData = await request.formData();
     const values = Object.fromEntries(formData);
-    const categories = ["Personal", "Business"];
-    const category = categories[Math.floor(Math.random() * categories.length)];
+
+    console.log(values);
 
     const data = JSON.stringify({
         ...values,
         additionalInfo: values.note,
-        category,
+        category: values.category,
         ownerId: process.env.OWNER_ID,
     });
 

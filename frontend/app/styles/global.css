@@ -84,10 +84,11 @@ button {
     border: none;
     outline: none;
     font-size: 1.8rem;
+    padding-inline-start: .8em;
 }
 
 .task__form-name:focus,
-.task-note:focus {
+.task__form-note:focus {
     border-left: 2px solid gray;
 }
 
@@ -95,9 +96,18 @@ button {
     resize: none;
     border: none;
     outline: none;
+    padding-inline-start: .8em;
 }
 
 .task-expiration {
     color: var(--font-title-clr);
     border: none;
+}
+
+.task__form-expiration-category-span {
+    display: grid;
+    grid-auto-flow: column;
+    place-content: start;
+    gap: 1em;
+    padding-inline-start: .8em;
 }

@@ -1,7 +1,8 @@
+import Alert from "@mui/material/Alert";
 import type { ActionArgs, LinksFunction, LoaderArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useActionData, useLoaderData } from "@remix-run/react";
 import StyledPaper from "~/components/shared/StyledPaper";
 import TaskForm from "~/components/TaskForm";
 import updateTaskCss from "../../../styles/update-task.css";
@@ -32,16 +33,21 @@ export const action = async ({ request }: ActionArgs) => {
     const body = JSON.stringify({
         label: values.label,
         expiration: values.expiration,
-        additionalInfo: values.note
+        additionalInfo: values.note,
+        category: values.category
     });
 
-    await fetch(`${process.env.API_ADDRESS}/tasks/${values.taskId}`, {
+    const response = await fetch(`${process.env.API_ADDRESS}/tasks/${values.taskId}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
         },
         body,
     });
+
+    if (response.status === 400) {
+        return json({ ok: false, message: "label must contain 2 or more characters" });
+    }
 
     return redirect("/");
 };
@@ -61,17 +67,23 @@ export const loader = async ({ params }: LoaderArgs) => {
 };
 
 export default function TaskRoute() {
-    const data = useLoaderData<typeof loader>();
+    const { task } = useLoaderData<typeof loader>();
+    const actionData = useActionData<typeof action>();
+
     return (
         <StyledPaper className="container">
             <TaskForm
                 data={{
-                    expiration: data.task?.expiration,
-                    label: data.task?.label,
-                    note: data.task?.additionalInfo,
-                    id: data?.task?.id,
-                }}
-            />
+                    expiration: task?.expiration,
+                    label: task?.label,
+                    note: task?.additionalInfo,
+                    id: task?.id,
+                    category: task?.category
+                }}>
+                {actionData && !actionData?.ok && (
+                    <Alert severity="error">{actionData?.message}</Alert>
+                )}
+            </TaskForm>
         </StyledPaper>
     );
 }

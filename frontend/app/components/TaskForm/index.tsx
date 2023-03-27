@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Form, useNavigation } from "@remix-run/react";
 import DatePicker from "~/components/shared/DatePicker";
 import BackButton from "~/components/shared/BackButton";
@@ -10,6 +10,7 @@ type TaskFormProps = {
         label?: string;
         note?: string;
         expiration?: string;
+        category?: string;
     };
     children?: React.ReactNode;
     error?: Boolean;
@@ -57,7 +58,26 @@ export default function TaskForm({ data, children, error }: TaskFormProps) {
                     className="task__form-note"
                 />
 
-                <DatePicker name="expiration" expiration={data?.expiration} />
+                <span className="task__form-expiration-category-span">
+                    <DatePicker name="expiration" expiration={data?.expiration} />
+
+                    <FormControl
+                        sx={{
+                            inlineSize: "200px",
+                        }}>
+                        <InputLabel id="category-label">Category</InputLabel>
+
+                        <Select
+                            labelId="category-label"
+                            id="category"
+                            label="Category"
+                            name="category"
+                            defaultValue={data?.category ?? "Personal"}>
+                            <MenuItem value="Personal">Personal</MenuItem>
+                            <MenuItem value="Business">Business</MenuItem>
+                        </Select>
+                    </FormControl>
+                </span>
 
                 <Button
                     variant="contained"

@@ -31,7 +31,7 @@ function DatePicker({ name, expiration }: DatePickerProps) {
                 id="date-picker"
                 hidden
                 type="text"
-                defaultValue={expiration}
+                defaultValue={expiration ?? new Date().toISOString()}
                 name={name}
                 ref={inputRef}
             />
