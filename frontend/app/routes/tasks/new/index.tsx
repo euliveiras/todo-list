@@ -92,6 +92,7 @@ export default function TaskRoute() {
                         marginInline: "auto",
                         marginBlockStart: "1em",
                         borderRadius: "20px",
+                        padding: "8px 32px"
                     }}>
                     {isSubmitting ? "Saving..." : "Save"}
                 </Button>
