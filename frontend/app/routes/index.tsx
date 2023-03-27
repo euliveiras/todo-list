@@ -11,7 +11,7 @@ import { Outlet } from "@remix-run/react";
 import Tasks from "~/components/Tasks";
 import tasksCss from "../styles/tasks.css";
 import tasksCardsCss from "../styles/tasks-cards.css";
-import StyledPaper from "~/components/StyledPaper";
+import StyledPaper from "~/components/shared/StyledPaper";
 
 type ITasks = {
     id: string;

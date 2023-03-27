@@ -1,12 +1,12 @@
 import { Alert, Button } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import type { ActionArgs, LinksFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
-import { Form, Link, useActionData, useNavigation } from "@remix-run/react";
+import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import newTaskCss from "../../../styles/new-task.css";
 import DatePicker from "~/components/shared/DatePicker";
-import StyledPaper from "~/components/StyledPaper";
+import StyledPaper from "~/components/shared/StyledPaper";
+import BackButton from "~/components/shared/BackButton";
 
 export const links: LinksFunction = () => {
     return [{ rel: "stylesheet", href: newTaskCss }];
@@ -58,10 +58,8 @@ export default function TaskRoute() {
 
     return (
         <StyledPaper className="container">
-            <Link to="/" className="close-btn" aria-label="back to home">
-                <CloseIcon />
-            </Link>
             <Form replace className="form" method="post">
+                <BackButton to="/" />
                 <label className="label" htmlFor="label-input" hidden>
                     Task name
                 </label>
