@@ -1,12 +1,12 @@
 import { Alert, Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import Paper from "@mui/material/Paper";
 import type { ActionArgs, LinksFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { Form, Link, useActionData, useNavigation } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import newTaskCss from "../../../styles/new-task.css";
 import DatePicker from "~/components/shared/DatePicker";
+import StyledPaper from "~/components/StyledPaper";
 
 export const links: LinksFunction = () => {
     return [{ rel: "stylesheet", href: newTaskCss }];
@@ -57,7 +57,7 @@ export default function TaskRoute() {
     });
 
     return (
-        <Paper sx={{ borderRadius: "42px" }} className="container">
+        <StyledPaper className="container">
             <Link to="/" className="close-btn" aria-label="back to home">
                 <CloseIcon />
             </Link>
@@ -92,13 +92,13 @@ export default function TaskRoute() {
                         marginInline: "auto",
                         marginBlockStart: "1em",
                         borderRadius: "20px",
-                        padding: "8px 32px"
+                        padding: "8px 32px",
                     }}>
                     {isSubmitting ? "Saving..." : "Save"}
                 </Button>
 
                 {data && !data?.ok && <Alert severity="error">{data?.message}</Alert>}
             </Form>
-        </Paper>
+        </StyledPaper>
     );
 }
