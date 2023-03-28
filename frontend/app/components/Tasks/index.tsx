@@ -14,13 +14,10 @@ type TasksProps = {
 
 export default function Tasks({ data }: TasksProps) {
     return (
-        <section className="tasks">
-            <h2 className="tasks__label">Today tasks</h2>
-            <div className="tasks__cards">
-                {data.map((task) => (
-                    <Task label={task.label} id={task.id} key={task.id} />
-                ))}
-            </div>
-        </section>
+        <div className="tasks__cards">
+            {data.map((task) => (
+                <Task label={task.label} id={task.id} key={task.id} />
+            ))}
+        </div>
     );
 }

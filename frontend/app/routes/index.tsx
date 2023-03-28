@@ -1,7 +1,8 @@
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { json } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, useFetcher, useLoaderData } from "@remix-run/react";
 
+import DatePicker from "~/components/shared/DatePicker";
 import indexCss from "../styles/index.css";
 import categoriesCss from "../styles/categories.css";
 import categoriesCardCss from "../styles/categories-cards.css";
@@ -54,7 +55,14 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-    const response = await fetch(`${process.env.API_ADDRESS}/tasks/${process.env.OWNER_ID}`, {
+    const urlParams = new URLSearchParams(request.url.split("?")[1]);
+    const values = Object.fromEntries(urlParams);
+
+    const url = new URL(`${process.env.API_ADDRESS}/tasks/${process.env.OWNER_ID}`)
+    
+    url.searchParams.append("expiration", values?.expiration)
+
+    const response = await fetch(url, {
         method: "GET",
     });
 
@@ -78,6 +86,11 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function IndexRoute() {
     const data = useLoaderData<typeof loader>();
+    const fetcher = useFetcher();
+
+    const handleFilter = (e: Date | null) => {
+        fetcher.submit({ _action: "filter", expiration: e?.toISOString() ?? "" });
+    };
 
     return (
         <main className="container">
@@ -93,7 +106,21 @@ export default function IndexRoute() {
 
                 <Categories data={data.categories} />
 
-                <Tasks data={data.tasks} />
+                <section className="tasks">
+                    <span>
+                        <h2 className="tasks__label">Today tasks</h2>
+
+                        <fetcher.Form>
+                            <DatePicker
+                                name="expiration"
+                                label="Search task data"
+                                minDate={new Date("2023, 03, 28")}
+                                onChange={handleFilter}
+                            />
+                        </fetcher.Form>
+                    </span>
+                    <Tasks data={data.tasks} />
+                </section>
 
                 <Link to="/tasks/new" className="add-task-button">
                     <AddOutlinedIcon />
