@@ -1,6 +1,6 @@
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { json } from "@remix-run/node";
-import { Form, Link, useFetcher, useLoaderData, useSubmit } from "@remix-run/react";
+import { Form, Link, useLoaderData, useSubmit } from "@remix-run/react";
 
 import DatePicker from "~/components/shared/DatePicker";
 import indexCss from "../styles/index.css";
@@ -13,7 +13,7 @@ import Tasks from "~/components/Tasks";
 import tasksCss from "../styles/tasks.css";
 import tasksCardsCss from "../styles/tasks-cards.css";
 import StyledPaper from "~/components/shared/StyledPaper";
-import { format, parse } from "date-fns";
+import { format } from "date-fns";
 
 type ITasks = {
     id: string;
