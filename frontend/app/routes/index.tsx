@@ -113,7 +113,7 @@ export default function IndexRoute() {
                             {format(new Date(data.tasksDate), "dd/MMM/yyyy")}
                         </h2>
 
-                        <Form>
+                        <Form className="tasks-form__date-picker">
                             <DatePicker
                                 name="expiration"
                                 label="Search task date"

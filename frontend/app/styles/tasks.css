@@ -18,6 +18,13 @@
     text-transform: uppercase;
     color: var(--font-title-clr);
 }
+
+@media (max-width: 420px) {
+    .tasks__label {
+        display: none;
+    }
+}
+
 .tasks__cards {
     margin-block-start: 2em;
     padding-block-end: 2em;

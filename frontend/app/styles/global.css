@@ -46,12 +46,6 @@ button {
     overflow-y: hidden;
 }
 
-@media (min-width: 420px) {
-    .styled-paper {
-        margin: 10%;
-    }
-}
-
 @media (min-width: 720px) {
     .styled-paper {
         margin-block: 1em;
@@ -86,7 +80,7 @@ button {
     border: none;
     outline: none;
     font-size: 1.8rem;
-    padding-inline-start: .8em;
+    padding-inline-start: 0.8em;
 }
 
 .task__form-name:focus,
@@ -98,7 +92,7 @@ button {
     resize: none;
     border: none;
     outline: none;
-    padding-inline-start: .8em;
+    padding-inline-start: 0.8em;
 }
 
 .task-expiration {
@@ -111,10 +105,10 @@ button {
     grid-auto-flow: column;
     place-content: start;
     gap: 1em;
-    padding-inline-start: .8em;
+    padding-inline-start: 0.8em;
 }
 
-@media (max-width: 520px){
+@media (max-width: 520px) {
     .task__form-expiration-category-span {
         grid-auto-flow: row;
         place-content: center;
