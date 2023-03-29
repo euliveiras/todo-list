@@ -7,6 +7,10 @@ import {
 import { PrismaTasksMapper } from './prisma-tasks-mapper';
 import { PrismaService } from './prisma.service';
 
+type FilterOptions = {
+  expiration: Date;
+};
+
 @Injectable()
 export class PrismaTasksRepository implements TasksRepository {
   constructor(private prisma: PrismaService) {}
@@ -16,10 +20,24 @@ export class PrismaTasksRepository implements TasksRepository {
       data: raw,
     });
   }
-  async findManyTasksByOwnerId(ownerId: string): Promise<Task[]> {
+  async findManyTasksByOwnerId(
+    ownerId: string,
+    filter: FilterOptions,
+  ): Promise<Task[]> {
+    const start = new Date(filter.expiration);
+    const end = new Date(filter.expiration);
+    start.setUTCHours(0, 0, 0, 0);
+    end.setUTCHours(23, 59, 59, 999);
+
+    console.log(start);
+    console.log(end);
     const tasks = await this.prisma.task.findMany({
       where: {
         ownerId,
+        AND: filter.expiration && [
+          { expiration: { gte: start } },
+          { expiration: { lte: end } },
+        ],
       },
     });
 

@@ -1,6 +1,6 @@
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { json } from "@remix-run/node";
-import { Link, useFetcher, useLoaderData } from "@remix-run/react";
+import { Form, Link, useFetcher, useLoaderData, useSubmit } from "@remix-run/react";
 
 import DatePicker from "~/components/shared/DatePicker";
 import indexCss from "../styles/index.css";
@@ -13,6 +13,7 @@ import Tasks from "~/components/Tasks";
 import tasksCss from "../styles/tasks.css";
 import tasksCardsCss from "../styles/tasks-cards.css";
 import StyledPaper from "~/components/shared/StyledPaper";
+import { format, parse } from "date-fns";
 
 type ITasks = {
     id: string;
@@ -56,11 +57,11 @@ export const action = async ({ request }: ActionArgs) => {
 
 export const loader = async ({ request }: LoaderArgs) => {
     const urlParams = new URLSearchParams(request.url.split("?")[1]);
-    const values = Object.fromEntries(urlParams);
+    const { expiration } = Object.fromEntries(urlParams);
 
-    const url = new URL(`${process.env.API_ADDRESS}/tasks/${process.env.OWNER_ID}`)
-    
-    url.searchParams.append("expiration", values?.expiration)
+    const url = new URL(`${process.env.API_ADDRESS}/tasks/${process.env.OWNER_ID}`);
+
+    expiration && url.searchParams.append("expiration", expiration);
 
     const response = await fetch(url, {
         method: "GET",
@@ -81,18 +82,17 @@ export const loader = async ({ request }: LoaderArgs) => {
     return json({
         categories,
         tasks: data,
-        tasksDate: values.expiration
+        tasksDate: expiration,
     });
 };
 
 export default function IndexRoute() {
     const data = useLoaderData<typeof loader>();
-    const fetcher = useFetcher();
+    const submit = useSubmit();
 
     const handleFilter = (e: Date | null) => {
-        fetcher.submit({ _action: "filter", expiration: e?.toISOString() ?? "" });
+        submit({ _action: "filter", expiration: e?.toISOString() ?? "" });
     };
-
     return (
         <main className="container">
             <StyledPaper
@@ -109,18 +109,20 @@ export default function IndexRoute() {
 
                 <section className="tasks">
                     <span className="tasks__filter">
-                        <h2 className="tasks__label">Today tasks</h2>
+                        <h2 className="tasks__label">
+                            {format(new Date(data.tasksDate), "dd/MMM/yyyy")}
+                        </h2>
 
-                        <fetcher.Form>
+                        <Form>
                             <DatePicker
                                 name="expiration"
                                 label="Search task date"
                                 minDate={new Date("2023, 03, 28")}
                                 onChange={handleFilter}
                             />
-                        </fetcher.Form>
+                        </Form>
                     </span>
-                    <Tasks data={data.tasks} />
+                    <Tasks key="tasks-group" data={data.tasks} />
                 </section>
 
                 <Link to="/tasks/new" className="add-task-button">

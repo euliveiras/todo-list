@@ -8,10 +8,17 @@ export interface UpdateTaskDTO {
   expiration?: Date;
 }
 
+type FilterOptions = {
+  expiration: Date;
+};
+
 export abstract class TasksRepository {
   abstract create(task: Task): Promise<void>;
   abstract update(id: string, props: UpdateTaskDTO): Promise<void>;
   abstract findById(taskId: string): Promise<Task>;
   abstract deleteById(taskId: string): Promise<void>;
-  abstract findManyTasksByOwnerId(ownerId: string): Promise<Task[]>;
+  abstract findManyTasksByOwnerId(
+    ownerId: string,
+    filter?: FilterOptions,
+  ): Promise<Task[]>;
 }
