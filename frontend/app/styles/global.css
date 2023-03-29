@@ -38,10 +38,12 @@ button {
 .styled-paper {
     min-inline-size: 300px;
     max-inline-size: 720px;
-    min-block-size: 720px;
-    margin: 5%;
+    max-block-size: 820px;
+    margin-block: 10%;
+    margin-inline: 5%;
     padding: 2em;
     position: relative;
+    overflow-y: hidden;
 }
 
 @media (min-width: 420px) {
@@ -52,7 +54,7 @@ button {
 
 @media (min-width: 720px) {
     .styled-paper {
-        margin-block: 5%;
+        margin-block: 1em;
         margin-inline: auto;
     }
 }

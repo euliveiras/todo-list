@@ -81,6 +81,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     return json({
         categories,
         tasks: data,
+        tasksDate: values.expiration
     });
 };
 
@@ -107,13 +108,13 @@ export default function IndexRoute() {
                 <Categories data={data.categories} />
 
                 <section className="tasks">
-                    <span>
+                    <span className="tasks__filter">
                         <h2 className="tasks__label">Today tasks</h2>
 
                         <fetcher.Form>
                             <DatePicker
                                 name="expiration"
-                                label="Search task data"
+                                label="Search task date"
                                 minDate={new Date("2023, 03, 28")}
                                 onChange={handleFilter}
                             />
