@@ -82,7 +82,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     return json({
         categories,
         tasks: data,
-        tasksDate: expiration,
+        tasksDate: expiration ?? new Date(),
     });
 };
 
