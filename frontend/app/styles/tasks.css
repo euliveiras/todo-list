@@ -1,5 +1,14 @@
 .tasks {
-    overflow-x: hidden;
+    display: grid;
+    overflow-y: hidden;
+}
+
+.tasks__filter {
+    display: grid;
+    padding-block-start: 1em;
+    justify-content: space-between;
+    grid-auto-flow: column;
+    place-items: center;
 }
 
 .tasks__label {
@@ -9,10 +18,18 @@
     text-transform: uppercase;
     color: var(--font-title-clr);
 }
+
+@media (max-width: 420px) {
+    .tasks__label {
+        display: none;
+    }
+}
+
 .tasks__cards {
-    padding-block: 2em;
+    margin-block-start: 2em;
+    padding-block-end: 2em;
     display: grid;
     gap: 1em;
     grid-auto-rows: 60px;
-    overflow-x: scroll;
+    overflow-y: scroll;
 }

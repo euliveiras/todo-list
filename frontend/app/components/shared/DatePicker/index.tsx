@@ -3,13 +3,19 @@ import { DatePicker as MuiPicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { parse, parseISO } from "date-fns";
 import { useRef } from "react";
+import type { SxProps } from "@mui/material";
 
-type DatePickerProps = {
+interface DatePickerProps {
     name: string;
     expiration?: string;
-};
+    onChange?: (e: Date | null) => void;
+    sx?: SxProps;
+    label?: string;
+    format?: string;
+    minDate?: Date;
+}
 
-function DatePicker({ name, expiration }: DatePickerProps) {
+function DatePicker({ name, expiration, onChange, ...props }: DatePickerProps) {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleChange = (e: Date | null) => {
@@ -17,8 +23,8 @@ function DatePicker({ name, expiration }: DatePickerProps) {
             inputRef.current.value =
                 e?.toISOString() ??
                 parse(new Date().toString(), "dd/MMMM/yyyy", new Date()).toISOString();
-            console.log(inputRef.current.value);
         }
+        onChange && onChange(e);
     };
 
     return (
@@ -37,11 +43,12 @@ function DatePicker({ name, expiration }: DatePickerProps) {
             />
 
             <MuiPicker
-                minDate={new Date()}
-                label="day/month/year"
-                format="dd/MMMM/yyyy"
+                minDate={props.minDate ?? new Date()}
+                label={props.label ?? "day/month/year"}
+                format={props.format ?? "dd/MMMM/yyyy"}
                 sx={{
                     inlineSize: "200px",
+                    ...props.sx,
                 }}
                 onChange={handleChange}
                 defaultValue={expiration ? parseISO(expiration) : new Date()}
@@ -50,10 +57,10 @@ function DatePicker({ name, expiration }: DatePickerProps) {
     );
 }
 
-export default function Wrapper({ name, expiration }: { name: string; expiration?: string }) {
+export default function Wrapper({ name, expiration, onChange, ...props }: DatePickerProps) {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker name={name} expiration={expiration} />
+            <DatePicker name={name} expiration={expiration} onChange={onChange} {...props} />
         </LocalizationProvider>
     );
 }

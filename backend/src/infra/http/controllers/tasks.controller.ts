@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CreateTask } from 'src/application/tasks/use-cases/create-task';
 import { DeleteTask } from 'src/application/tasks/use-cases/delete-task';
@@ -25,8 +26,15 @@ export class TasksController {
     private deleteTask: DeleteTask,
   ) {}
   @Get(':id')
-  async findManyByOwner(@Param('id') id: string) {
-    const tasks = await this.findMany.execute(id);
+  async findManyByOwner(
+    @Param('id') id: string,
+    @Query('expiration') expiration?: Date,
+  ) {
+    const filter = {
+      expiration: expiration,
+    };
+
+    const tasks = await this.findMany.execute(id, filter);
     return { data: tasks.map((task) => HttpMapper.toHttp(task)) };
   }
 

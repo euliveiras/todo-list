@@ -1,7 +1,8 @@
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { json } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Form, Link, useLoaderData, useSubmit } from "@remix-run/react";
 
+import DatePicker from "~/components/shared/DatePicker";
 import indexCss from "../styles/index.css";
 import categoriesCss from "../styles/categories.css";
 import categoriesCardCss from "../styles/categories-cards.css";
@@ -12,6 +13,7 @@ import Tasks from "~/components/Tasks";
 import tasksCss from "../styles/tasks.css";
 import tasksCardsCss from "../styles/tasks-cards.css";
 import StyledPaper from "~/components/shared/StyledPaper";
+import { format } from "date-fns";
 
 type ITasks = {
     id: string;
@@ -54,7 +56,14 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-    const response = await fetch(`${process.env.API_ADDRESS}/tasks/${process.env.OWNER_ID}`, {
+    const urlParams = new URLSearchParams(request.url.split("?")[1]);
+    const { expiration } = Object.fromEntries(urlParams);
+
+    const url = new URL(`${process.env.API_ADDRESS}/tasks/${process.env.OWNER_ID}`);
+
+    expiration && url.searchParams.append("expiration", expiration);
+
+    const response = await fetch(url, {
         method: "GET",
     });
 
@@ -73,12 +82,17 @@ export const loader = async ({ request }: LoaderArgs) => {
     return json({
         categories,
         tasks: data,
+        tasksDate: expiration ?? new Date(),
     });
 };
 
 export default function IndexRoute() {
     const data = useLoaderData<typeof loader>();
+    const submit = useSubmit();
 
+    const handleFilter = (e: Date | null) => {
+        submit({ _action: "filter", expiration: e?.toISOString() ?? "" });
+    };
     return (
         <main className="container">
             <StyledPaper
@@ -93,7 +107,23 @@ export default function IndexRoute() {
 
                 <Categories data={data.categories} />
 
-                <Tasks data={data.tasks} />
+                <section className="tasks">
+                    <span className="tasks__filter">
+                        <h2 className="tasks__label">
+                            {format(new Date(data.tasksDate), "dd/MMM/yyyy")}
+                        </h2>
+
+                        <Form className="tasks-form__date-picker">
+                            <DatePicker
+                                name="expiration"
+                                label="Search task date"
+                                minDate={new Date("2023, 03, 28")}
+                                onChange={handleFilter}
+                            />
+                        </Form>
+                    </span>
+                    <Tasks key="tasks-group" data={data.tasks} />
+                </section>
 
                 <Link to="/tasks/new" className="add-task-button">
                     <AddOutlinedIcon />
