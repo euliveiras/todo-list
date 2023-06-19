@@ -14,6 +14,8 @@
     - deploy
 ***       
 ## refactor
+- ### general
+	- change package manager to pnpm
 - ### frontend
     - **general**
         - page's title
