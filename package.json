@@ -1,0 +1,27 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "definitive todo-list",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "webpack watch --mode development",
+    "serve": "ts-node ./server/server.ts",
+    "dev:server": "ts-node-dev ./server/server.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.18",
+    "prettier": "3.0.3",
+    "ts-loader": "^9.4.4",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "htmx.org": "^1.9.6"
+  }
+}
