@@ -1,8 +1,7 @@
-{
+
   "name": "todo-list",
   "version": "1.0.0",
   "description": "definitive todo-list",
-  "main": "index.js",
   "scripts": {
     "webpack": "webpack watch --mode development",
     "serve": "ts-node ./server/server.ts",
