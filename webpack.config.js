@@ -2,17 +2,13 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: { main: "./views/bundle.ts", signIn: "./views/signIn.ts" },
+  entry: { main: "./views/bundle.ts" },
   plugins: [new MiniCssExtractPlugin()],
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
-        ],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
       {
         test: /\.tsx?$/,
