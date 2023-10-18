@@ -1,6 +1,6 @@
-export const categories = ['Personal', 'Business'] as Array<CategoryType>;
+export const categories = ["Personal", "Business"] as Array<CategoryType>;
 
-export type CategoryType = 'Personal' | 'Business' | undefined;
+export type CategoryType = "Personal" | "Business" | undefined;
 
 export class Category {
   private _category: CategoryType = undefined;
@@ -21,7 +21,7 @@ export class Category {
     const isCategoriesValid = this.validateCategory(categories);
 
     if (!isCategoriesValid) {
-      throw new Error('Must be a valid category');
+      throw new Error("Must be a valid category");
     }
     this.category = categories;
   }

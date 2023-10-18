@@ -1,2 +1,2 @@
 import "./bundle.css";
-import 'htmx.org';
+import "htmx.org";

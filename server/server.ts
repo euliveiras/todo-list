@@ -36,16 +36,8 @@ app.get("/", (req, res) => {
   res.render("index", { title: "login", message: "Olá mundo" });
 });
 
-app.get("/click", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.get("/sign-up", (req, res) => {
-  res.sendFile("views/signIn.html", options);
-});
-
-app.get("/profile", requiresAuth(), (req, res) => {
-  res.send(JSON.stringify(req.oidc.user));
+app.get("/home", (req, res) => {
+  res.render("home", { user: { name: "Matheus" } });
 });
 
 app.listen(port, () => {

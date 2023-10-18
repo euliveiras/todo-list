@@ -1,8 +1,7 @@
 declare global {
   interface Window {
-	htmx: unknown
+    htmx: unknown;
   }
 }
 
-
-export default window
+export default window;
