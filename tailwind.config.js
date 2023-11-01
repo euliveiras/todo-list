@@ -5,6 +5,7 @@ module.exports = {
     fontFamily: {
       londrina: ["'Londrina Solid'"],
       body: ['"Roboto"', "'sans serif'"],
+      taskName: ["'Patrick Hand', 'cursive'"],
     },
     extend: {},
   },

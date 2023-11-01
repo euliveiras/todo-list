@@ -47,6 +47,10 @@ app.get("/home", (req, res) => {
     tasks: [
       { name: "Watch netflix", completed: true, color: colors.red['200'] },
       { name: "Study C programming", completed: false, color: colors.orange['200']},
+      { name: "Study Python programming", completed: false, color: colors.purple['200']},
+      { name: "Study JS", completed: false, color: colors.blue['200']},
+      { name: "Study Math", completed: false, color: colors.yellow['200']},
+      { name: "Play The Witcher", completed: false, color: colors.lime['200']},
     ],
   });
 });

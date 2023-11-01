@@ -1,11 +1,11 @@
-<div class="flex justify-center items-center justify-between py-8 px-4 w-full bg-white border-4" style="border-color: <%= task.color %>">
+<div class="flex justify-center items-center justify-between py-8 px-4 gap-2 w-full bg-white border-4" style="border-color: <%= task.color %>">
   <span class="flex gap-2">
     <input class="peer" id="isCompleted" type="checkbox" 
 	<% if(task.completed) { %>
 		<%- "checked" -%>
 	<% } %>
 	/>
-    <label for="isCompleted" class="peer-checked:line-through">
+    <label for="isCompleted" class="font-taskName tracking-wide peer-checked:line-through">
       <%= task.name %>
     </label>
   </span>

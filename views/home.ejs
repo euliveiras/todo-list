@@ -9,7 +9,7 @@
   </head>
   <body class="w-screen min-h-screen font-body bg-indigo-100">
     <div class="h-screen w-full flex flex-col justify-center">
-      <div class="max-w-xs h-5/6 mx-auto mt-4 p-8 outline outline-black-400">
+      <div class="max-w-xs h-5/6 grid overflow-hidden mx-auto mt-4 p-8 outline outline-black-400">
         <section class="overflow-hidden max-w-full flex flex-col gap-1">
           <h1 class="font-bold text-xl">coé, <%= user.name %>!</h1>
           <p class="mt-2 mb-4 font-semibold text-slate-400 tracking-wide">
@@ -21,12 +21,12 @@ categorias</p>
 	    <%- include('partials/label', {label}); %>
 	 <% }); %>
         </section>
-        <div>
+        <div class="overflow-hidden h-full">
           <p class="mt-2 mb-4 font-semibold text-slate-400 tracking-wide">
             Today tasks
           </p>
           <div 
-            class="overflow-scroll grid auto-rows-[96px] auto-cols-fr gap-4 pb-8"
+            class="overflow-scroll h-full grid auto-rows-[96px] auto-cols-fr gap-4 pb-8"
 >
 		<% tasks.forEach(function(task){ %>
 			<%- include('partials/task', {task}); %>
