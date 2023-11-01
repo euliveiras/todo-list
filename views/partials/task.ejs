@@ -1,0 +1,27 @@
+<div class="flex justify-center items-center justify-between py-8 px-4 w-full bg-white border-4" style="border-color: <%= task.color %>">
+  <span class="flex gap-2">
+    <input class="peer" id="isCompleted" type="checkbox" 
+	<% if(task.completed) { %>
+		<%- "checked" -%>
+	<% } %>
+	/>
+    <label for="isCompleted" class="peer-checked:line-through">
+      <%= task.name %>
+    </label>
+  </span>
+  <div class="flex gap-4">
+    <img
+      src="images/edit-svgrepo-com.svg"
+      alt="edit task"
+      width="20"
+      height="20"
+      class="text-black"
+    />
+    <img
+      src="images/delete-svgrepo-com.svg"
+      alt="edit task"
+      width="20"
+      height="20"
+    />
+  </div>
+</div>

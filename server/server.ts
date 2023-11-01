@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import { auth } from "express-openid-connect";
-import { requiresAuth } from "express-openid-connect";
+import colors from "tailwindcss/colors";
 
 dotenv.config();
 
@@ -37,7 +37,18 @@ app.get("/", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-  res.render("home", { user: { name: "Matheus" } });
+  res.render("home", {
+    user: { name: "Matheus" },
+    labels: [
+      { name: "Pessoal", quantity: 2 },
+      { name: "Professional", quantity: 4 },
+      { name: "Hobby", quantity: 2 },
+    ],
+    tasks: [
+      { name: "Watch netflix", completed: true, color: colors.red['200'] },
+      { name: "Study C programming", completed: false, color: colors.orange['200']},
+    ],
+  });
 });
 
 app.listen(port, () => {

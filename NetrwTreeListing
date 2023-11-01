@@ -1,0 +1,23 @@
+../
+todo-list/
+| .git/
+| dist/
+| node_modules/
+| server/
+| views/
+| | partials/
+| | bundle.css
+| | bundle.ts
+| | home.ejs
+| | index.ejs
+| .env
+| .gitignore
+| .prettierignore
+| .prettierrc
+| package-lock.json
+| package.json
+| postcss.config.js
+| tailwind.config.js
+| tsconfig.json
+| types.d.ts
+| webpack.config.js

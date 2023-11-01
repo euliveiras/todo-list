@@ -1,68 +1,39 @@
 <!doctype html>
-<html lang="en">
-  <head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>home</title> <link rel="stylesheet" href="main.css" />
-		<script src="main.js" type="module"></script>
-	</head>
-	<body class="w-screen min-h-screen font-body bg-indigo-100"> 
-		<div class="h-screen w-full flex flex-col justify-center">
-			<div class="max-w-xs h-5/6 mx-auto mt-4 p-8 outline outline-black-400 ">
-				<section class=" overflow-hidden max-w-full flex flex-col gap-1">
-					<h1 class="font-bold text-xl">coé, <%= user.name %>!</h1>
-					<p class="mt-4 font-semibold text-sm text-slate-400">categorias</p>
-					<div class="overflow-scroll my-4 grid grid-flow-col auto-cols-[120px] gap-4">
-
-						<div class="grid h-24 bg-white pt-4 pb-3 px-2">
-							<div>
-								<p class="text-xs font-semibold text-slate-400">2 tasks</p>
-								<p>Pessoal</p>
-							</div>
-							<div class="w-full h-1 bg-slate-800 mt-auto"></div>
-						</div>
-
-						<div class="grid h-24 bg-white pt-4 pb-3 px-2">
-							<div>
-								<p class="text-xs font-semibold text-slate-400">2 tasks</p>
-								<p>Pessoal</p>
-							</div>
-							<div class="w-full h-1 bg-slate-800 mt-auto"></div>
-						</div>
-
-						<div class="grid h-24 bg-white pt-4 pb-3 px-2">
-							<div>
-								<p class="text-xs font-semibold text-slate-400">2 tasks</p>
-								<p>Pessoal</p>
-							</div>
-							<div class="w-full h-1 bg-slate-800 mt-auto"></div>
-						</div>
-
-						<div class="grid h-24 bg-white pt-4 pb-3 px-2">
-							<div>
-								<p class="text-xs font-semibold text-slate-400">2 tasks</p>
-								<p>Pessoal</p>
-							</div>
-							<div class="w-full h-1 bg-slate-800 mt-auto"></div>
-						</div>
-					</div>
-				</section>
-				<div>
-					<p>
-						Today tasks
-					</p>
-					<div>
-						<div>
-							<input type="radio" />
-							<p>watch netflix</p>
-							<div>
-								click button & delete button
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</body>
+<html lang="en"> <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>home</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="main.js" type="module"></script>
+  </head>
+  <body class="w-screen min-h-screen font-body bg-indigo-100">
+    <div class="h-screen w-full flex flex-col justify-center">
+      <div class="max-w-xs h-5/6 mx-auto mt-4 p-8 outline outline-black-400">
+        <section class="overflow-hidden max-w-full flex flex-col gap-1">
+          <h1 class="font-bold text-xl">coé, <%= user.name %>!</h1>
+          <p class="mt-2 mb-4 font-semibold text-slate-400 tracking-wide">
+categorias</p>
+          <div
+            class="overflow-scroll my-4 grid grid-flow-col auto-rows-[134px] auto-cols-[120px] gap-4 pb-4"
+          >
+	 <% labels.forEach(function(label){ %>
+	    <%- include('partials/label', {label}); %>
+	 <% }); %>
+        </section>
+        <div>
+          <p class="mt-2 mb-4 font-semibold text-slate-400 tracking-wide">
+            Today tasks
+          </p>
+          <div 
+            class="overflow-scroll grid auto-rows-[96px] auto-cols-fr gap-4 pb-8"
+>
+		<% tasks.forEach(function(task){ %>
+			<%- include('partials/task', {task}); %>
+		<% }); %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
