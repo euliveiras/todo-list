@@ -40,17 +40,25 @@ app.get("/home", (req, res) => {
   res.render("home", {
     user: { name: "Matheus" },
     labels: [
-      { name: "Pessoal", quantity: 2 },
-      { name: "Professional", quantity: 4 },
-      { name: "Hobby", quantity: 2 },
+      { name: "Pessoal", quantity: 2, color: colors.purple["200"] },
+      { name: "Professional", quantity: 4, color: colors.red["200"] },
+      { name: "Hobby", quantity: 2, color: colors.lime["200"] },
     ],
     tasks: [
-      { name: "Watch netflix", completed: true, color: colors.red['200'] },
-      { name: "Study C programming", completed: false, color: colors.orange['200']},
-      { name: "Study Python programming", completed: false, color: colors.purple['200']},
-      { name: "Study JS", completed: false, color: colors.blue['200']},
-      { name: "Study Math", completed: false, color: colors.yellow['200']},
-      { name: "Play The Witcher", completed: false, color: colors.lime['200']},
+      { name: "Meet 9:00", completed: false, color: colors.red["200"] },
+      {
+        name: "Study C programming",
+        completed: false,
+        color: colors.orange["200"],
+      },
+      {
+        name: "Study Python programming",
+        completed: false,
+        color: colors.purple["200"],
+      },
+      { name: "Study JS", completed: false, color: colors.blue["200"] },
+      { name: "Study Math", completed: false, color: colors.yellow["200"] },
+      { name: "Play The Witcher", completed: false, color: colors.lime["200"] },
     ],
   });
 });

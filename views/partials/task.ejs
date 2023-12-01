@@ -1,27 +1,44 @@
 <div class="flex justify-center items-center justify-between py-8 px-4 gap-2 w-full bg-white border-4" style="border-color: <%= task.color %>">
-  <span class="flex gap-2">
+<div id="delete-message" class="hide px-4 w-full text-red-600 flex items-center justify-between">
+<p>are you sure?</p>
+<span class="inline-flex gap-1">
+<button>
+<p>yes</p>
+</button>
+<p>|</p>
+<button>
+<p>no?</>
+</button>
+</span>
+</div>
+  <span id="checkbox__container" class="flex gap-2">
     <input class="peer" id="isCompleted" type="checkbox" 
 	<% if(task.completed) { %>
 		<%- "checked" -%>
 	<% } %>
 	/>
-    <label for="isCompleted" class="font-taskName tracking-wide peer-checked:line-through">
+    <label id="task-name" for="isCompleted" class="font-taskName tracking-wide peer-checked:line-through">
       <%= task.name %>
     </label>
   </span>
-  <div class="flex gap-4">
+  <div id="btns__container" class="flex gap-4">
+<button type="button" name="edit-task" id="edit-task">
     <img
+	id="edit-task-img"
       src="images/edit-svgrepo-com.svg"
       alt="edit task"
       width="20"
       height="20"
       class="text-black"
     />
+</button>
+<button type="button" name="delete-task" id="delete-task" >
     <img
-      src="images/delete-svgrepo-com.svg"
+      src="images/delete-task.svg"
       alt="edit task"
       width="20"
       height="20"
     />
+</button>
   </div>
 </div>

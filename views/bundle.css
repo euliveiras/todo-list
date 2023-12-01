@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Roboto&family=Patrick+Hand&display=swap");
+
+.show {
+  display: flex;
+}
+
+.hide {
+  display: none;
+}

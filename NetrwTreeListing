@@ -6,6 +6,8 @@ todo-list/
 | server/
 | views/
 | | partials/
+| | | label.ejs
+| | | task.ejs
 | | bundle.css
 | | bundle.ts
 | | home.ejs
@@ -14,6 +16,7 @@ todo-list/
 | .gitignore
 | .prettierignore
 | .prettierrc
+| NetrwTreeListing
 | package-lock.json
 | package.json
 | postcss.config.js
